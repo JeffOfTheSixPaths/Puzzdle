@@ -1,10 +1,13 @@
-import Image from "next/image";
+import { promises as fs } from 'fs';
 
-export default function Home() {
+export default async function Page() {
+  const file = await fs.readFile(process.cwd() + '/app/data.json', 'utf8');
+  const data = JSON.parse(file);
+
   return (
     <div>
-      <h1> THis is a header </h1>
-      <p> this is a paragraph </p>
+      <h1>{data.title}</h1>
+      <p>{data.content}</p>
     </div>
   );
 }
